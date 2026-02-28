@@ -24,7 +24,7 @@ export default function Home() {
   };
 
   return (
-  <div className="min-h-screen bg-gray-500">
+  <div className="min-h-screen bg-gray-50">
 
     <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 text-white py-24 text-center px-6">
       <h1 className="text-5xl font-bold mb-6 tracking-tight">
