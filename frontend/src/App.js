@@ -10,7 +10,7 @@ import Writingblog from "./components/Writingblog";
 import Userblog from "./components/Userblog";
 import Blogmore from "./components/Blogmore";
 import Edit from "./components/Edit";
-import AdminRoute from "./components/AdminRoute";
+
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
             <Route path="/user-blog" element={<Userblog />} />
             <Route path="/blog/:id" element={<Blogmore />} />
             <Route path="/update/:id" element={<Edit />} />
-            <Route path="/dashboard" element={<AdminRoute><Dashboard /></AdminRoute>} />
+           
           </Routes>
         </BrowserRouter>
       </header>
