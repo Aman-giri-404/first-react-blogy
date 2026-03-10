@@ -24,19 +24,24 @@ export default function Profile() {
     );
   }
 
+  const breadcrumbs = [
+    { page: "/", title: "Home" },
+    { page: "/users", title: "Users" },
+    { page: null, title: "User Profile" },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-100 py-16 px-6">
       <div className="max-w-4xl mx-auto bg-white shadow-2xl rounded-2xl p-10">
-      <div className="max-w-4xl mx-auto">
-        <Breadcrumbs />
-      </div>
+        <div className="max-w-4xl mx-auto">
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
         <div className="flex justify-between items-center mb-10">
           <h1 className="text-3xl font-bold text-indigo-600">
             Welcome, {user.name}
           </h1>
         </div>
 
-       
         <div className="grid md:grid-cols-2 gap-8">
           <div className="bg-gray-50 p-6 rounded-xl shadow">
             <h2 className="text-lg font-semibold mb-4 text-gray-700">

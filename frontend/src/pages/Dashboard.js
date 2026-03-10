@@ -8,7 +8,10 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
-    navigate("/admin-panel");
+const user =  localStorage.getItem("admin");
+    if (!user) {
+      navigate("/admin-panel");
+    }
     fetchBlogs();
   }, [navigate]);
 
