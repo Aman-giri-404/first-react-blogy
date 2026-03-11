@@ -68,12 +68,18 @@ export default function Userblog() {
       toast.error("Something went wrong");
     }
   };
+  const breadcrumbs = [
+    { page: "/", title: "Home" },
+    { page: "/users", title: "Users" },
+    { page: "/users", title: "Users profile" },
+    { page: null, title: "User blog" },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-50 py-14 px-6">
       <ToastContainer position="bottom-right" autoClose={2000} />
       <div className="max-w-4xl mx-auto">
-        <Breadcrumbs />
+        <Breadcrumbs items={breadcrumbs} />
       </div>
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold text-indigo-600 mb-12 text-center">

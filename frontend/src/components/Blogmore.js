@@ -31,6 +31,13 @@ export default function Blogmore() {
       setLoading(false);
     }
   };
+  const breadcrumbs = [
+    { page: "/", title: "Home" },
+    { page: "/users", title: "Users" },
+    { page: "/users", title: "User Profile" },
+    { page: "/users", title: "User blog" },
+    { page: null, title: "full page" },
+  ];
 
   if (loading)
     return <p className="text-center mt-10 text-lg">Loading blog...</p>;
@@ -41,7 +48,7 @@ export default function Blogmore() {
   return (
     <div className="max-w-4xl mx-auto px-6 py-12">
       <div className="max-w-4xl mx-auto">
-        <Breadcrumbs />
+        <Breadcrumbs items={breadcrumbs} />
       </div>
       <button
         onClick={() => navigate(-1)}

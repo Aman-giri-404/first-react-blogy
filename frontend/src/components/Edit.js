@@ -63,6 +63,14 @@ export default function Edit() {
       toast.error("Something went wrong");
     }
   };
+
+  const breadcrumbs = [
+    { page: "/", title: "Home" },
+    { page: "/users", title: "Users" },
+    { page: "/users", title: "User Profile" },
+    { page: "/users", title: "blog" },
+    { page: null, title: "Edit" },
+  ];
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-6">
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-10">
@@ -70,7 +78,7 @@ export default function Edit() {
           <h1 className="text-2xl font-bold text-indigo-600">Write Blog</h1>
           <ToastContainer position="bottom-right" autoClose={2000} />
           <div className="max-w-4xl mx-auto">
-            <Breadcrumbs />
+            <Breadcrumbs items={breadcrumbs} />
           </div>
           <button
             onClick={() => navigate("/user-blog")}

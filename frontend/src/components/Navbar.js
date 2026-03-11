@@ -25,7 +25,6 @@ export default function Navbar() {
     <nav className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 shadow-xl sticky top-0 z-50 backdrop-blur-lg">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center h-16">
-     
           <div
             className="flex items-center space-x-3 cursor-pointer"
             onClick={() => navigate("/")}
@@ -43,7 +42,6 @@ export default function Navbar() {
             </span>
           </div>
 
-         
           <div className="hidden sm:flex space-x-8">
             {navigation.map((item) => (
               <Link

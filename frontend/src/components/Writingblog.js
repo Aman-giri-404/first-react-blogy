@@ -9,46 +9,50 @@ export default function Writingblog() {
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const authorId = localStorage.getItem("authorId");
+    try {
+      const authorId = localStorage.getItem("authorId");
 
-    if (!authorId) {
-      toast.error("Please login first");
-      return;
-    }
+      if (!authorId) {
+        toast.error("Please login first");
+        return;
+      }
 
-    const res = await fetch(
-      `${process.env.REACT_APP_API_URL}/blog/create`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/blog/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           title,
           content,
-          authorId, 
+          authorId,
         }),
-      }
-    );
+      });
 
-    const data = await res.json();
+      const data = await res.json();
 
-    if (!res.ok) {
-      toast.error(data.message || "Failed to publish blog");
-    } else {
-      toast.success("Blog Submitted for Approval!");
-       setTimeout(() => {
+      if (!res.ok) {
+        toast.error(data.message || "Failed to publish blog");
+      } else {
+        toast.success("Blog Submitted for Approval!");
+        setTimeout(() => {
           navigate("/profile");
         }, 1500);
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong");
     }
-  } catch (error) {
-    console.error(error);
-    toast.error("Something went wrong");
-  }
-};
+  };
+
+  const breadcrumbs = [
+    { page: "/", title: "Home" },
+    { page: "/users", title: "Users" },
+    { page: "/users", title: "Users profile" },
+    { page: null, title: "Writting section" },
+  ];
 
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-6">
@@ -57,8 +61,8 @@ export default function Writingblog() {
           <h1 className="text-2xl font-bold text-indigo-600">Write Blog</h1>
           <ToastContainer position="bottom-right" autoClose={2000} />
           <div className="max-w-4xl mx-auto">
-        <Breadcrumbs />
-      </div>
+            <Breadcrumbs items={breadcrumbs} />
+          </div>
           <button
             onClick={() => navigate("/profile")}
             className="text-gray-600 hover:text-gray-900"
