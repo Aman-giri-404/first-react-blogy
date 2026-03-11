@@ -9,8 +9,12 @@ import {
   getSingleBlog,
  updateBlog,
 } from "../controllers/blogController.js";
+import upload from "../middleware/upload.js";
 
 const bRoutes = express.Router();
+
+bRoutes.post("/create", upload.single("thumbnail"), blogwriter);
+
 
 bRoutes.post("/create", blogwriter);
 bRoutes.get("/admin", blogadmin);

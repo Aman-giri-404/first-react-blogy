@@ -4,6 +4,7 @@ export const blogwriter = async (req, res) => {
   try {
     const { title, content, authorId } = req.body;
 
+    const thumbnailPath = req.file ? req.file.path : null;
     if (!authorId) {
       return res.status(400).json({ message: "Author ID missing" });
     }
@@ -11,6 +12,7 @@ export const blogwriter = async (req, res) => {
     const blogger = await Blog.create({
       title,
       content,
+      thumbnail: thumbnailPath,
       author: authorId,
       status: "pending",
     });

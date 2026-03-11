@@ -5,7 +5,7 @@ import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import bRoutes from "./routes/bRoutes.js";
 import dns from "dns"
-
+import path from "path";
 
 dotenv.config();
 const app = express();
@@ -13,6 +13,9 @@ app.use(cors());
 app.use(express.json());
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 connectDB();
+
+
+app.use('/uploads', express.static(path.join(process.cwd(), 'uploads')));
 
 app.get("/", (req, res) => {
   res.send("API is running...");

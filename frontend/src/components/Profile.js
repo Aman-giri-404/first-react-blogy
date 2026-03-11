@@ -26,7 +26,6 @@ export default function Profile() {
 
   const breadcrumbs = [
     { page: "/", title: "Home" },
-    { page: "/users", title: "Users" },
     { page: null, title: "User Profile" },
   ];
 

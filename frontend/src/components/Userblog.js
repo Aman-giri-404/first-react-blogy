@@ -70,8 +70,8 @@ export default function Userblog() {
   };
   const breadcrumbs = [
     { page: "/", title: "Home" },
-    { page: "/users", title: "Users" },
-    { page: "/users", title: "Users profile" },
+   
+    { page: "/profile", title: "Users profile" },
     { page: null, title: "User blog" },
   ];
 
