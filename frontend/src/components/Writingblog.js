@@ -7,6 +7,7 @@ import Upload from "./Upload";
 export default function Writingblog() {
   const [title, setTitle] = useState("Untitled Blog");
   const [content, setContent] = useState();
+  const [thumbnail, setThumbnail] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -29,6 +30,7 @@ export default function Writingblog() {
           title,
           content,
           authorId,
+          thumbnail
         }),
       });
 
@@ -73,8 +75,8 @@ export default function Writingblog() {
         </div>
 
 
+         <Upload setThumbnail={setThumbnail} />
 
-<Upload />
         <form onSubmit={handleSubmit}>
           <input
             type="text"

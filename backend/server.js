@@ -25,12 +25,16 @@ app.get("/", (req, res) => {
 app.use("/api/users", userRoutes);
 app.use("/api/blog", bRoutes);
 
-app.post("/api/upload", upload.single("image"), (req,res)=>{
+app.post("/api/upload", upload.single("image"), (req, res) => {
+
+  const filePath = `/uploads/${req.file.filename}`;
+
   res.json({
-    message:"File uploaded successfully",
-    file:req.file
-  })
-})
+    message: "File uploaded successfully",
+    path: filePath
+  });
+
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

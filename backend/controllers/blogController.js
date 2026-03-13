@@ -2,9 +2,8 @@ import Blog from "../models/Blog.js";
 // Create blog
 export const blogwriter = async (req, res) => {
   try {
-    const { title, content, authorId } = req.body;
+    const { title, content, authorId, thumbnail } = req.body;
 
-    const thumbnailPath = req.file ? req.file.path : null;
     if (!authorId) {
       return res.status(400).json({ message: "Author ID missing" });
     }
@@ -12,7 +11,7 @@ export const blogwriter = async (req, res) => {
     const blogger = await Blog.create({
       title,
       content,
-      thumbnail: thumbnailPath,
+      thumbnail,   // direct frontend se aayega
       author: authorId,
       status: "pending",
     });
@@ -21,6 +20,7 @@ export const blogwriter = async (req, res) => {
       message: "Blog submitted",
       blogger,
     });
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

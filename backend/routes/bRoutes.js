@@ -13,7 +13,7 @@ import upload from "../middleware/upload.js";
 
 const bRoutes = express.Router();
 
-bRoutes.post("/create", upload.single("thumbnail"), blogwriter);
+bRoutes.post("/create", blogwriter);
 
 
 
