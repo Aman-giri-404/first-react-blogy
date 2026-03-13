@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Breadcrumbs from "./Breadcrumbs";
+import Upload from "./Upload";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
@@ -46,6 +47,7 @@ export default function Profile() {
             <h2 className="text-lg font-semibold mb-4 text-gray-700">
               Profile Information
             </h2>
+           
 
             <p className="mb-3">
               <strong>Name:</strong> {user.name}
@@ -60,6 +62,7 @@ export default function Profile() {
             </p>
           </div>
 
+        
           <div className="bg-indigo-50 p-6 rounded-xl shadow">
             <h2 className="text-lg font-semibold mb-4 text-gray-700">
               Quick Actions

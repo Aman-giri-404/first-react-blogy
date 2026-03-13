@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import Breadcrumbs from "../components/Breadcrumbs";
+
 
 export default function Dashboard() {
   const [blogs, setBlogs] = useState([]);
@@ -72,7 +72,7 @@ const user =  localStorage.getItem("admin");
     <div className="min-h-screen bg-gray-50 py-14 px-6">
       <ToastContainer position="bottom-right" autoClose={2000} />
       <div className="max-w-4xl mx-auto">
-        <Breadcrumbs />
+       
       </div>
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold text-indigo-600 mb-12 text-center">

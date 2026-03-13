@@ -16,7 +16,7 @@ const bRoutes = express.Router();
 bRoutes.post("/create", upload.single("thumbnail"), blogwriter);
 
 
-bRoutes.post("/create", blogwriter);
+
 bRoutes.get("/admin", blogadmin);
 bRoutes.get("/public", blogget);
 bRoutes.put("/update/:id", blogapproved);

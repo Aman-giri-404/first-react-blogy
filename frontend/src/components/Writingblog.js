@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import Breadcrumbs from "./Breadcrumbs";
+import Upload from "./Upload";
 
 export default function Writingblog() {
   const [title, setTitle] = useState("Untitled Blog");
@@ -71,6 +72,9 @@ export default function Writingblog() {
           </button>
         </div>
 
+
+
+<Upload />
         <form onSubmit={handleSubmit}>
           <input
             type="text"
