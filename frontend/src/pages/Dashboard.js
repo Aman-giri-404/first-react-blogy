@@ -2,13 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 
-
 export default function Dashboard() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
-const user =  localStorage.getItem("admin");
+    const user = localStorage.getItem("admin");
     if (!user) {
       navigate("/admin-panel");
     }
@@ -68,12 +67,11 @@ const user =  localStorage.getItem("admin");
     }
   };
 
+
   return (
     <div className="min-h-screen bg-gray-50 py-14 px-6">
       <ToastContainer position="bottom-right" autoClose={2000} />
-      <div className="max-w-4xl mx-auto">
-       
-      </div>
+      <div className="max-w-4xl mx-auto"></div>
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl font-bold text-indigo-600 mb-12 text-center">
           Admin Dashboard
@@ -94,6 +92,13 @@ const user =  localStorage.getItem("admin");
                 key={blog._id}
                 className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-6 flex flex-col justify-between"
               >
+                {blog.thumbnail && (
+                  <img
+                    src={`${process.env.REACT_APP_IMG_URL}${blog.thumbnail}`}
+                    alt={blog.title}
+                    className="w-full h-48 object-cover rounded-xl mb-4"
+                  />
+                )}
                 <div>
                   <div className="flex justify-between items-start mb-4">
                     <h3 className="text-xl font-semibold text-indigo-600">

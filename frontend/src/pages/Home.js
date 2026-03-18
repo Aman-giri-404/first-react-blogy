@@ -52,6 +52,13 @@ export default function Home() {
               key={blog._id}
               className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-6 flex flex-col justify-between"
             >
+              {blog.thumbnail && (
+                  <img
+                    src={`${process.env.REACT_APP_IMG_URL}${blog.thumbnail}`}
+                    alt={blog.title}
+                    className="w-full h-48 object-cover rounded-xl mb-4"
+                  />
+                )}
               <div>
                 <h3 className="text-xl font-semibold mb-4 text-indigo-600">
                   {blog.title}
