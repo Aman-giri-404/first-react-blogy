@@ -58,7 +58,13 @@ export default function Blogmore() {
       </button>
 
       <h1 className="text-4xl font-bold mb-6 text-indigo-600">{blog.title}</h1>
-
+      {blog.thumbnail && (
+        <img
+          src={`${process.env.REACT_APP_IMG_URL}${blog.thumbnail}`}
+          alt={blog.title}
+          // className="w-full h-48 object-cover rounded-xl mb-4"
+        />
+      )}
       <p className="text-gray-700 leading-relaxed whitespace-pre-line">
         {blog.content}
       </p>
