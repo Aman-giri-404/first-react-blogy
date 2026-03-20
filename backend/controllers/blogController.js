@@ -162,3 +162,34 @@ export const updateBlog = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+
+
+// img update by admin 
+export const updateImg = async (req, res) => {
+  try {
+    const { thumbnail } = req.body;
+
+    const updatedBlog = await Blog.findByIdAndUpdate(
+      req.params.id,
+      { 
+       thumbnail,
+        status: "pending"  
+      },
+      { new: true }
+    );
+
+    if (!updatedBlog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    res.status(200).json({
+      message: "Blog updated and approved successfully",
+      updatedBlog,
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
