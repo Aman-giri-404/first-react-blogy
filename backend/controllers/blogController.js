@@ -174,18 +174,14 @@ export const updateImg = async (req, res) => {
     const updatedBlog = await Blog.findByIdAndUpdate(
       req.params.id,
       { 
-       thumbnail,
-        status: "pending"  
+        thumbnail,
+        status: "pending"
       },
       { new: true }
     );
 
-    if (!updatedBlog) {
-      return res.status(404).json({ message: "Blog not found" });
-    }
-
     res.status(200).json({
-      message: "Blog updated and approved successfully",
+      message: "Image updated",
       updatedBlog,
     });
 
