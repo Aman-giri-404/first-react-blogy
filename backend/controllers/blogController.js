@@ -169,21 +169,7 @@ export const updateBlog = async (req, res) => {
 // img update by admin 
 export const updateImg = async (req, res) => {
   try {
-    const { thumbnail } = req.body;
-
-    const updatedBlog = await Blog.findByIdAndUpdate(
-      req.params.id,
-      { 
-        thumbnail,
-        status: "pending"
-      },
-      { new: true }
-    );
-
-    res.status(200).json({
-      message: "Image updated",
-      updatedBlog,
-    });
+   
 
   } catch (error) {
     res.status(500).json({ message: error.message });
