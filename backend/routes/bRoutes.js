@@ -14,7 +14,7 @@ import upload from "../middleware/upload.js";
 
 const bRoutes = express.Router();
 
-bRoutes.post("/create", blogwriter);
+bRoutes.post("/create", upload.single("image"), blogwriter);
 
 
 
@@ -25,7 +25,7 @@ bRoutes.delete("/delete/:id", deleteblog);
 bRoutes.get("/userblog", getUserBlogs);
 bRoutes.get("/blogfull/:id", getSingleBlog);
 bRoutes.put("/updatednew/:id", updateBlog);
-bRoutes.put("/updateimg/:id", updateImg);
+bRoutes.put("/updateimg/:id", upload.single("image"), updateImg);
 
 
 export default bRoutes;

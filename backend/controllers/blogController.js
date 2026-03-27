@@ -1,9 +1,11 @@
 import Blog from "../models/Blog.js";
+import fs from "fs"
+import path from "path";
 // Create blog
 export const blogwriter = async (req, res) => {
   try {
-    const { title, content, authorId, thumbnail } = req.body;
-
+    const { title, content, authorId } = req.body;
+const thumbnail = req.file ? req.file.filename : null;
     if (!authorId) {
       return res.status(400).json({ message: "Author ID missing" });
     }
@@ -154,7 +156,7 @@ export const updateBlog = async (req, res) => {
     }
 
     res.status(200).json({
-      message: "Blog updated and approved successfully",
+      message: "Blog updated and sent for review",
       updatedBlog,
     });
 
@@ -169,7 +171,35 @@ export const updateBlog = async (req, res) => {
 // img update by admin 
 export const updateImg = async (req, res) => {
   try {
-   
+    if (!req.file) {
+      return res.status(400).json({ message: "No image uploaded" });
+    }
+
+    const blog = await Blog.findById(req.params.id);
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    // 🔴 OLD IMAGE DELETE (safe)
+    if (blog.thumbnail) {
+      const imgPath = path.join("uploads", blog.thumbnail);
+
+      if (fs.existsSync(imgPath)) {
+        fs.unlinkSync(imgPath);
+      }
+    }
+
+    // 🟢 UPDATE IMAGE
+    blog.thumbnail = req.file.filename;
+    blog.status = "pending";
+
+    await blog.save();
+
+    res.status(200).json({
+      message: "Image updated",
+      updatedBlog: blog,
+    });
 
   } catch (error) {
     res.status(500).json({ message: error.message });
