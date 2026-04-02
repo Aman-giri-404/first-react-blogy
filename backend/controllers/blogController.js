@@ -1,11 +1,12 @@
 import Blog from "../models/Blog.js";
-import fs from "fs"
+import fs from "fs";
 import path from "path";
+
 // Create blog
 export const blogwriter = async (req, res) => {
   try {
     const { title, content, authorId } = req.body;
-const thumbnail = req.file ? req.file.filename : null;
+    const thumbnail = req.file ? req.file.filename : null;
     if (!authorId) {
       return res.status(400).json({ message: "Author ID missing" });
     }
@@ -13,7 +14,7 @@ const thumbnail = req.file ? req.file.filename : null;
     const blogger = await Blog.create({
       title,
       content,
-      thumbnail,   // direct frontend se aayega
+      thumbnail,
       author: authorId,
       status: "pending",
     });
@@ -22,7 +23,6 @@ const thumbnail = req.file ? req.file.filename : null;
       message: "Blog submitted",
       blogger,
     });
-
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -135,38 +135,43 @@ export const getSingleBlog = async (req, res) => {
   }
 };
 
-
 // updateBlog by user
 export const updateBlog = async (req, res) => {
   try {
     const { title, content } = req.body;
 
-    const updatedBlog = await Blog.findByIdAndUpdate(
-      req.params.id,
-      { 
-        title, 
-        content, 
-        status: "pending"  
-      },
-      { new: true }
-    );
+    const blog = await Blog.findById(req.params.id);
 
-    if (!updatedBlog) {
+    if (!blog) {
       return res.status(404).json({ message: "Blog not found" });
     }
 
-    res.status(200).json({
-      message: "Blog updated and sent for review",
-      updatedBlog,
-    });
+    // 👉 If new image uploaded
+    if (req.file) {
+      // 🧹 Delete old image
+      if (blog.thumbnail) {
+        const oldPath = path.join("uploads", blog.thumbnail);
 
+        if (fs.existsSync(oldPath)) {
+          fs.unlinkSync(oldPath);
+        }
+      }
+
+      // 👉 Save new image
+      blog.thumbnail = req.file.filename;
+    }
+
+    blog.title = title;
+    blog.content = content;
+    blog.status = "pending";
+
+    await blog.save();
+
+    res.status(200).json({
+      message: "Blog updated with new image",
+      blog,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
-
-
-
-
-// img update by admin 
-

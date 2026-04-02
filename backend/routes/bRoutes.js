@@ -8,7 +8,7 @@ import {
   getUserBlogs,
   getSingleBlog,
  updateBlog,
- updateImg,
+
 } from "../controllers/blogController.js";
 import upload from "../middleware/upload.js";
 
@@ -24,8 +24,8 @@ bRoutes.put("/update/:id", blogapproved);
 bRoutes.delete("/delete/:id", deleteblog);
 bRoutes.get("/userblog", getUserBlogs);
 bRoutes.get("/blogfull/:id", getSingleBlog);
-bRoutes.put("/updatednew/:id", updateBlog);
-bRoutes.put("/updateimg/:id", upload.single("thumbnail"), updateImg);
+bRoutes.put("/updatednew/:id", upload.single("thumbnail"),updateBlog);
+
 
 
 export default bRoutes;
