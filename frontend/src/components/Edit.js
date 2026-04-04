@@ -6,6 +6,7 @@ import Breadcrumbs from "./Breadcrumbs";
 export default function Edit() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -15,12 +16,13 @@ export default function Edit() {
         const res = await fetch(
           `${process.env.REACT_APP_API_URL}/blog/blogfull/${id}`,
         );
-
+       
         const data = await res.json();
 
         if (res.ok) {
           setTitle(data.blog.title);
           setContent(data.blog.content);
+          setBlogs(data.blog.thumbnail);
         }
       } catch (error) {
         console.error(error);
@@ -44,6 +46,7 @@ export default function Edit() {
           body: JSON.stringify({
             title,
             content,
+            thumbnail,
           }),
         },
       );
@@ -89,6 +92,22 @@ export default function Edit() {
         </div>
 
         <form onSubmit={handleSubmit}>
+          {blogs.map((blog) => {
+            <div
+              key={blog._id}
+              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-6 flex flex-col justify-between"
+            ></div>;
+            {
+              blog.thumbnail && (
+                <img
+                  src={`${process.env.REACT_APP_IMG_URL}${blog.thumbnail}`}
+                  alt={blog.title}
+                  className="w-full h-48 object-cover rounded-xl mb-4"
+                />
+              );
+            }
+          })}
+
           <input
             type="text"
             value={title}

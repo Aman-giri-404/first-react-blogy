@@ -138,7 +138,7 @@ export const getSingleBlog = async (req, res) => {
 // updateBlog by user
 export const updateBlog = async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { title, content , thumbnail} = req.body;
 
     const blog = await Blog.findById(req.params.id);
 
@@ -164,7 +164,7 @@ export const updateBlog = async (req, res) => {
     blog.title = title;
     blog.content = content;
     blog.status = "pending";
-
+    blog.thumbnail = thumbnail
     await blog.save();
 
     res.status(200).json({
